@@ -3,26 +3,22 @@ const posts = require('./posts-model')
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
+router.get('/', (req, res, next) => {
   // DO YOUR MAGIC
   posts.get()
     .then((posts) => {
       res.status(200).json(posts)
     })
-    .catch((err) => [
-      console.log(err)
-    ])
+    .catch(next)
 });
 
-router.get('/:id', (req, res) => {
+router.get('/:id', (req, res, next) => {
   // DO YOUR MAGIC
   posts.getById(req.params.id)
     .then((post) => {
       res.status(200).json(post)
     })
-    .catch((err) => {
-      console.log(err)
-    })
+    .catch(next)
 
 });
 
